@@ -16,7 +16,7 @@ Run tests
 
 .. code-block::
 
-    pytest
+    pytest -s
 
 
 .. _issue #92: https://github.com/pytest-dev/pytest-flask/issues/92

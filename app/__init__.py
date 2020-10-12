@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 
 def create_app(test_config=None):
@@ -9,10 +9,12 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
 
-    @app.route('/security', methods=["POST", "GET"])
-    def security():
-        if request.method == "POST":
-            return "post request received"
-        return "get request received"
+    @app.route('/', methods=["POST", "GET"])
+    def auth():
+        json_data = request.get_json()
+        print(json_data)
+        username = json_data['username']
+        password = json_data['password']
+        return jsonify(token=f"t-{username}@{password}")
 
     return app
